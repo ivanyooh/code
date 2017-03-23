@@ -51,6 +51,8 @@ source:[ML Pipeline](https://spark.apache.org/docs/latest/ml-pipeline.html)
 
   管道由一系列的阶段组成，每个阶段是转换器或估计器。这些阶段会将数据框按顺序的转化。
   以下将会文档处理阐明管道工作流程
+![文档处理工作流](http://i1.piimg.com/567571/0e6c0bce76e1c101.png)
+上图第一行代表了管道处理的三个阶段，前两个阶段(*Tokenizer*和*HashingTF*)是转换器,第三阶段是估计器(*LogisticRegression*)。图中第二行表示数据在管道中的流向，圆柱代表数据框。管道的``fit()``方法在最初的数据框中被调用，数据框中包括文档和对应的标签。转换器Tokenizer调用``transform()``方法对文档进行分词，将词语作为新的列添加到数据框中。转换器HashingTF的``transform()``方法将数据框中词语的列转换成特征向量，同时将特征向量添加到数据框中。接着管道会调用估计器``LogisticRegression``的``fit()``方法产生``LogisticRegressionModel``模型。如果管道中接着还有更多的阶段，则会调用``LogisticRegressionModel``的``transform()``方法对数据框进行转换，然后再将转换后的数据框传递到下一阶段。
 
-![文档处理工作流]  (https://spark.apache.org/docs/2.0.2/img/ml-Pipeline.png)
-上图第一行代表了管道处理的三个阶段，前两个阶段(*Tokenizer*和*HashingTF*)是转换器,第三阶段是估计器(*LogisticRegression*)
+管道是一个估计器，因此在管道的``fit()``方法被调用后，会产生一个管道模型(*PipelineModel*)，这是一个转换器。管道模型会在测试时被使用，下面将对此说明
+![文档处理-管道模型工作流](http://i2.buimg.com/567571/6dbf4733c197be92.png)
