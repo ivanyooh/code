@@ -1,4 +1,4 @@
-Pipeline的使用 
+Pipeline的使用
 -----
 source:[ML Pipeline](https://spark.apache.org/docs/latest/ml-pipeline.html)
 
@@ -13,5 +13,4 @@ source:[ML Pipeline](https://spark.apache.org/docs/latest/ml-pipeline.html)
 * 参数(Parameter)：spark将估计器和转换器使用共同的api指定参数
 
 #### 数据框(Dataframe)
-    
-
+  机器学习使用
